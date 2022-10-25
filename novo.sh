@@ -6,10 +6,7 @@ for ((i = 0; i == 0; i++)); do
     fi
 done
 touch log.txt
-
 i=1
-
-
 while [ "$(ls -A ./log/)" != null ]; do
 
     sleep 10s
