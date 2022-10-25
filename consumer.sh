@@ -1,4 +1,9 @@
- checkBuffer(){
+readvalue(){
+    local value=$(cat $1)
+    echo $value
+}
+
+checkBuffer(){
     declare -i buffer=$(readvalue buffer.txt)
     echo "buffer" $buffer "bufferSize" $bufferSize
     if [ "$buffer" -eq "0" ]; then
@@ -23,25 +28,24 @@ function wakeUpProducer(){
         echo "1" > producer.txt
     fi
 }
-
+i=1
 while true;do
     checkBuffer
     declare -i buffer=$(readvalue buffer.txt)
-    echo "$(($buffer-1))" > buffer.txt
+
     for ((i = 0; i == 0; i++)); do
     if [[ -e log.txt ]]; then
         rm -r log.txt
     fi
     done
     touch log.txt
-    i=1
     hora=$(date +"%T")
     var_string_log=$(grep -i "nome" ./log/${i}.txt)
     read -a vetor_string_log <<<$var_string_log
-    #echo ${vetor_string_log[@]}
     line="${vetor_string_log[1]} ${vetor_string_log[2]} ${vetor_string_log[3]} $hora"
     echo $line >> log.txt
     rm "./log/${i}.txt"
     i=$(($i + 1))
 
+    echo "$(($buffer-1))" > buffer.txt
 done
