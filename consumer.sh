@@ -32,12 +32,9 @@ while true;do
     if [[ -e log.txt ]]; then
         rm -r log.txt
     fi
-done
-touch log.txt
-i=1
-while [ "$(ls -A ./log/)" != null ]; do
-
-    sleep 10s
+    done
+    touch log.txt
+    i=1
     hora=$(date +"%T")
     var_string_log=$(grep -i "nome" ./log/${i}.txt)
     read -a vetor_string_log <<<$var_string_log
@@ -47,5 +44,4 @@ while [ "$(ls -A ./log/)" != null ]; do
     rm "./log/${i}.txt"
     i=$(($i + 1))
 
-done
 done
