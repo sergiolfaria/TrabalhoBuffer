@@ -48,4 +48,3 @@ while true;do
     counter=$((counter+1))
     R=$(($RANDOM%$div))
 done
-#teste demarque seila kkkkkkk chupapika
