@@ -48,4 +48,5 @@ while true;do
     wakeUpConsumer
     counter=$((counter+1))
     R=$(($RANDOM%$div))
+
 done

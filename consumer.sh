@@ -19,15 +19,10 @@ checkBuffer() {
     fi
 }
 
-local consumer=$(readvalue consumer.txt)
-if [ "$consumer" -eq "0" ]; then
-    echo "1" >consumer.txt
-fi
-
-function wakeUpProducer() {
-    local Producer=$(readvalue producer.txt)
+function wakeUpProducer(){
+    local producer=$(readvalue producer.txt)
     if [ "$producer" -eq "0" ]; then
-        echo "1" >producer.txt
+        echo "1" > producer.txt
     fi
 }
 
@@ -42,18 +37,15 @@ touch log.txt
 while true; do
 
     checkBuffer
-    declare -i buffer=$(readvalue buffer.txt)
-
     hora=$(date +"%T")
     var_string_log=$(grep -i "nome" ./log/${contador_log}.txt)
     read -a vetor_string_log <<<$var_string_log
     line="${vetor_string_log[1]} ${vetor_string_log[2]} ${vetor_string_log[3]} $hora"
     echo $line >> log.txt
     rm "./log/${contador_log}.txt"
+    declare -i buffer=$(readvalue buffer.txt)
+    echo "$(($buffer-1))" > buffer.txt    
+    wakeUpProducer
     contador_log=$(($contador_log + 1))
-    if [ "$buffer" -eq "0" ]; then
-        wakeUpProducer
-    fi
 
-    echo "$(($buffer - 1))" >buffer.txt
 done
