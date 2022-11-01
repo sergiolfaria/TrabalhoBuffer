@@ -50,3 +50,4 @@ while true;do
     R=$(($RANDOM%$div))
 
 done
+#comentaário
