@@ -26,7 +26,6 @@ checkBuffer(){
         local producer=$(readvalue producer.txt)
         while [ "$producer" -eq "0" ]; do
             echo "Waiting for consumer"
-            sleep 1
             producer=$(readvalue producer.txt)
         done
     fi
